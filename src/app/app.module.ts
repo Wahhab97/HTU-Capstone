@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './lib/components/header/header.component';
 import { FooterComponent } from './lib/components/footer/footer.component';
 import {MaterialModule} from "./material/material.module";
-import { AppLayoutComponent } from './lib/components/app-layout/app-layout.component';
 import { LayoutComponent } from './lib/components/layout/layout.component';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { LayoutComponent } from './lib/components/layout/layout.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    AppLayoutComponent,
     LayoutComponent
   ],
   imports: [

@@ -1,0 +1,44 @@
+.sticky > a:first-of-type {
+  height: 100%;
+}
+a:first-of-type img {
+  height: 100%;
+}
+ul {
+  list-style: none;
+  display: flex;
+  gap: 0.5em;
+  margin: 0;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+}
+li {
+  height: calc(100% - 2px);
+  display: flex;
+  align-items: center;
+}
+li:hover {
+  border-bottom: 2px solid #ed4639;
+}
+li a{
+  text-decoration: none;
+  color: white;
+}
+button.menu-button {
+  display: none;
+}
+.sticky {
+  position: sticky;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 599px){
+  ul {
+    display: none;
+  }
+  button.menu-button {
+    display: block;
+  }
+}
