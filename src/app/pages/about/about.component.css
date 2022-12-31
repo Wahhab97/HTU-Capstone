@@ -1,0 +1,22 @@
+div {
+  padding: 16px;
+  min-height: calc(100vh - 124px);
+  box-sizing: border-box;
+}
+h1 {
+  font-size: 2.5em;
+}
+p, li {
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
+li {
+  box-sizing: border-box;
+  padding: 0 16px;
+  margin-left: 10px;
+}
+@media (max-width: 599px) {
+  div {
+    min-height: calc(100vh - 116px);
+  }
+}
