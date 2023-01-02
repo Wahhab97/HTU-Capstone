@@ -1,3 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body .page-container {
+  min-height: calc(100vh - 124px);
+}
+@media (max-width: 599px) {
+  body .page-container {
+    min-height: calc(100vh - 116px);
+  }
+}
