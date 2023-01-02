@@ -1,0 +1,23 @@
+.container {
+  width: 700px;
+  max-width: 100%;
+  margin: 0 auto;
+  min-height: calc(100vh - 124px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.container > form > * {
+  width: 100%;
+}
+h1 {
+  text-align: center;
+}
+.register {
+  margin-top: 1em;
+}
+@media (max-width: 599px) {
+  .container {
+    min-height: calc(100vh - 116px);
+  }
+}
