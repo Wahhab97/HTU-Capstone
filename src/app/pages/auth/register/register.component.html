@@ -1,4 +1,36 @@
 <div class="page-container">
   <h1>Sign Up</h1>
-  <form [formGroup]="registerForm" ]></form>
+  <form [formGroup]="registerForm" (submit)="signup()">
+    <mat-form-field>
+      <mat-label for="firstName">First Name</mat-label>
+      <input matInput name="firstName" id="firstName" formControlName="firstNameControl">
+      <mat-error *ngIf="registerForm.controls['firstNameControl'].hasError('required')">First name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="lastName">Last Name</mat-label>
+      <input matInput name="lastName" id="lastName" formControlName="lastNameControl">
+      <mat-error *ngIf="registerForm.controls['lastNameControl'].hasError('required')">Last name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="email">Email</mat-label>
+      <input matInput name="email" id="email" formControlName="emailControl">
+      <mat-error *ngIf="registerForm.controls['emailControl'].hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="registerForm.controls['emailControl'].hasError('email')">Email formatting is wrong</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="password">Password</mat-label>
+      <input matInput name="password" id="password" formControlName="passwordControl" type="password">
+      <mat-error *ngIf="registerForm.controls['passwordControl'].hasError('required')">Password is required</mat-error>
+      <mat-error *ngIf="registerForm.controls['passwordControl'].hasError('minlength')">Password must be 8 characters at least</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="confirm">Confirm Password</mat-label>
+      <input matInput name="confirm" id="confirm" formControlName="confirmPasswordControl" type="password" [errorStateMatcher]="matcher">
+      <mat-error *ngIf="registerForm.controls['confirmPasswordControl'].hasError('required')">Password confirmation is required</mat-error>
+      <mat-error *ngIf="registerForm.controls['confirmPasswordControl'].hasError('minlength')">Password confirmation must be 8 characters at least</mat-error>
+      <mat-error *ngIf="registerForm.hasError('passwordDoesntMatch')">Passwords Don't Match</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="registerForm.invalid">Sign Up</button>
+  </form>
+  <a routerLink="/auth/login" class="register">Already have an account?</a>
 </div>

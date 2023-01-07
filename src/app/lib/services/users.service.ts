@@ -7,11 +7,11 @@ import {from, Observable} from "rxjs";
   providedIn: 'root'
 })
 export class UsersService {
+  userCollection!: AngularFirestoreCollection<User>;
 
   constructor(private firestore: AngularFirestore) {
     this.userCollection = this.firestore.collection("Users");
   }
-  userCollection!: AngularFirestoreCollection<User>;
   addUser(user: User) {
     from(this.userCollection.add(user))
   }
