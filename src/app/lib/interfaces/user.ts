@@ -1,10 +1,10 @@
 export interface User {
-  id: string,
+  id?: string,
   firstName: string,
   lastName: string,
-  phone: number,
+  phone?: number,
   role: "user" | "admin" | "super-admin",
   email: string,
-  country: string,
-  dateOfBirth: string
+  country?: string,
+  dateOfBirth?: string
 }

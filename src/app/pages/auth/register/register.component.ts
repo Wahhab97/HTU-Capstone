@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {myErrorStateMatcher, passwordMatchingValidator} from "../../../lib/validators/passwordMatchValidator";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../lib/services/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(private router: Router) {
+  constructor(private router: Router, private auth: AuthService) {
   }
   registerForm= new FormGroup({
     firstNameControl: new FormControl("", [Validators.required]),
@@ -33,6 +34,15 @@ export class RegisterComponent {
     return this.registerForm.get("passwordControl");
   };
   signup() {
-    console.log(this.registerForm);
+    console.log(this.firstName?.value);
+    this.auth.signUp(
+      this.firstName?.value+"",
+      this.lastName?.value+"",
+      this.email?.value+"",
+      this.password?.value+"",
+      "user"
+    ).then((user) => {
+      this.router.navigate(['']);
+    }).catch((error) => console.log(error));
   }
 }
