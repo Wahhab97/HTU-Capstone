@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {AuthService} from "../../services/auth/auth.service";
+import {map, observable} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,26 @@ import {Router} from "@angular/router";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(private router: Router) {
+  public state$;
+
+  constructor(private router: Router, private auth: AuthService) {
+    this.state$ = auth.userState$.pipe(
+      map((val) => {
+        if(val) {
+          console.log(val);
+          return true;
+        }
+        console.log(this.state$);
+        return false;
+      })
+    );
   }
-  logIn() {
-    this.router.navigate(['/auth/login']);
+
+  navigation(location: string) {
+    this.router.navigate([location]);
+  }
+  logOut(){
+    this.auth.logOut();
+    this.router.navigate(['']);
   }
 }

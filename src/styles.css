@@ -4,6 +4,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 body .page-container {
   min-height: calc(100vh - 124px);
 }
+body .page-container > form {
+  box-sizing: border-box;
+  padding: 16px;
+  width: 700px;
+  max-width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.page-container > form > * {
+  width: 97%;
+}
 @media (max-width: 599px) {
   body .page-container {
     min-height: calc(100vh - 116px);

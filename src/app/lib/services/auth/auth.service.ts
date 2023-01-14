@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {of, switchMap} from "rxjs";
-import { User } from "../interfaces/user";
+import { User } from "../../interfaces/user";
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +34,9 @@ export class AuthService {
       };
       return this.fs.collection<User>('Users').doc(val.user?.uid).set(user);
     });
+  }
+
+  logOut() {
+    this.fireAuth.signOut();
   }
 }

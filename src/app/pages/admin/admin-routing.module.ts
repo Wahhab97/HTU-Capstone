@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {AdminDashboardComponent} from "./admin-dashboard/admin-dashboard.component";
 import {CreateAdminComponent} from "./create-admin/create-admin.component";
 import {SuperAdminAuthGuard} from "../../lib/guards/super-admin-auth.guard";
+import {CreateStartupComponent} from "./create-startup/create-startup.component";
 
 const routes: Routes = [
   {
@@ -13,8 +14,12 @@ const routes: Routes = [
   {
     path: 'createAdmin',
     component: CreateAdminComponent,
-    canLoad: [SuperAdminAuthGuard]
+    canActivate: [SuperAdminAuthGuard]
   },
+  {
+    path: 'createStartup',
+    component: CreateStartupComponent
+  }
 ];
 
 @NgModule({

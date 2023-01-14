@@ -1,5 +1,5 @@
-<mat-toolbar color="primary" class="sticky">
-  <a href="">
+<mat-toolbar color="primary" class="sticky" *ngIf="!(state$ | async); else LoggedIn">
+  <a>
     <img src="./assets/images/logo.png" alt="logo">
   </a>
   <ul>
@@ -7,19 +7,47 @@
     <li><a routerLink="/about">About</a></li>
     <li><a routerLink="#contact">Contact</a></li>
   </ul>
-  <button mat-flat-button color="accent" (click)="logIn()">Login</button>
+  <button mat-flat-button color="accent" (click)="navigation('auth/login')">Login</button>
   <button mat-icon-button aria-label="icon button with a menu icon" [matMenuTriggerFor]="menu" class="menu-button">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item (click)="navigation('')">
       <span>Home</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="navigation('about')">
       <span>About</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="navigation('#contact')">
       <span>Contact</span>
     </button>
   </mat-menu>
 </mat-toolbar>
+<ng-template #LoggedIn>
+  <mat-toolbar color="primary" class="sticky" >
+    <a>
+      <img src="./assets/images/logo.png" alt="logo">
+    </a>
+    <ul>
+      <li><a routerLink="/admin">Home</a></li>
+      <li><a routerLink="/admin/createAdmin">creat admin</a></li>
+      <li><a routerLink="/admin/createStartup">create startup</a></li>
+    </ul>
+    <button mat-flat-button color="accent" (click)="logOut()">Logout</button>
+    <button mat-icon-button aria-label="icon button with a menu icon" [matMenuTriggerFor]="menu" class="menu-button">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="navigation('admin')">
+        <span>Home</span>
+      </button>
+      <button mat-menu-item (click)="navigation('admin/createAdmin')">
+        <span>create admin</span>
+      </button>
+      <button mat-menu-item (click)="navigation('admin/createStartup')">
+        <span>create startup</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</ng-template>
+

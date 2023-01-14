@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {myErrorStateMatcher, passwordMatchingValidator} from "../../../lib/validators/passwordMatchValidator";
 import {Router} from "@angular/router";
-import {AuthService} from "../../../lib/services/auth.service";
+import {AuthService} from "../../../lib/services/auth/auth.service";
 
 @Component({
   selector: 'app-register',
