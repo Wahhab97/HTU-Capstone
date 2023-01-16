@@ -2,15 +2,16 @@ export interface Startup {
   id?: string,
   companyName: string,
   logo: string,
+  sector: string[];
   city: string,
   founder?: string,
-  numOfEmployees?: number,
-  yearOfEstablishment?: number,
+  numOfEmployees?: string,
+  yearOfEstablishment?: string,
   website?: string,
   email?: string,
   phone?: string,
   location?: {
-    latitude: number,
-    longitude: number
+    latitude: string,
+    longitude: string
   }
 }

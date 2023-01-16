@@ -12,9 +12,16 @@
         <input id="logo" name="logo" type="file" accept="image/*" required formControlName="logo" (change)="preview($event.target)">
       </div>
       <div class="img-div">
-        <img src="{{imgSrc}}">
+        <img [src]="imgSrc">
       </div>
     </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Sectors</mat-label>
+      <mat-select formControlName="sector" multiple>
+        <mat-option *ngFor="let sector of sectors" [value]="sector">{{sector}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <mat-form-field>
       <mat-label>City</mat-label>
@@ -28,6 +35,10 @@
     <mat-form-field>
       <mat-label>Number of Employees</mat-label>
       <input matInput id="numOfEmployees" name="numOfEmployees" formControlName="numOfEmployees" type="number">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Year of Establishment</mat-label>
+      <input matInput id="yearOfEstablishment" name="yearOfEstablishment" formControlName="yearOfEstablishment" type="number">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Website</mat-label>

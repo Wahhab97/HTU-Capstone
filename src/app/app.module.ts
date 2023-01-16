@@ -27,7 +27,8 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     LayoutComponent,
     AboutComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -42,6 +43,9 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     AngularFireStorageModule
   ],
   providers: [],
+  exports: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
