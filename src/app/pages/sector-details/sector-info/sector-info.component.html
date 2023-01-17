@@ -1,0 +1,41 @@
+<div class="page-container">
+  <h1>Sector: {{name}}</h1>
+  <h3>Number Of Companies: {{comNum}}</h3>
+
+  <div class="table-container" *ngIf="source">
+    <table mat-table [dataSource]="source" class="mat-elevation-z8 demo-table">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{element.companyName}}</td>
+      </ng-container>
+      <ng-container matColumnDef="founder">
+        <th mat-header-cell *matHeaderCellDef>Founder</th>
+        <td mat-cell *matCellDef="let element">{{element.founder}}</td>
+      </ng-container>
+      <ng-container matColumnDef="website">
+        <th mat-header-cell *matHeaderCellDef>Website</th>
+        <td mat-cell *matCellDef="let element">{{element.website}}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element">{{element.email}}</td>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef>Phone</th>
+        <td mat-cell *matCellDef="let element">{{element.phone}}</td>
+      </ng-container>
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef>City</th>
+        <td mat-cell *matCellDef="let element">{{element.city}}</td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        (click)="comDetails(row)"
+        *matRowDef="let row; columns: displayedColumns;"
+      ></tr>
+    </table>
+  </div>
+</div>
