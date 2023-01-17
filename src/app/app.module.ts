@@ -31,7 +31,6 @@ import {CommonModule} from "@angular/common";
     HomeComponent,
     NotFoundComponent,
     SectorComponent,
-
   ],
   imports: [
     BrowserModule,
