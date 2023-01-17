@@ -25,6 +25,11 @@ const routes: Routes = [
       .then(m => m.AdminModule),
     canLoad: [AdminAuthGuard]
   },
+  {
+    path: "sectors",
+    loadChildren: () => import("./pages/sector-details/sector-details.module")
+      .then(m => m.SectorDetailsModule),
+  },
 
   {path: "**", component: NotFoundComponent}
 ];
