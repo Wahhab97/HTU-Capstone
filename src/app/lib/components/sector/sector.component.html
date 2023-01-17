@@ -1,0 +1,7 @@
+<div class="container">
+  <h3>{{childSector.sectorName}}</h3>
+  <div class="logos-container">
+    <a routerLink="auth/login"><img src="./assets/images/logo.png" alt="logo"></a>
+  </div>
+  <button mat-raised-button color="accent" (click)="goToSector(childSector.sectorName)">See Details</button>
+</div>

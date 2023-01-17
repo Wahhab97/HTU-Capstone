@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0.5em;
+  gap: 0.3em;
+  background-color: var(--primary-color);
+  height: 100%;
+  color: var(--primary-text);
+  align-items: center;
+  border-radius: 8px;
+}
+h3 {
+  margin: 0;
+}
+.logos-container {
+  width: 95%;
+  height: 87%;
+  background-color: var(--primary-text);
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.logos-container * {
+  max-width: 120px;
+}
