@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 import {Sector} from "../../interfaces/sector";
-import {from} from "rxjs";
+import {from, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -16,4 +16,8 @@ export class SectorsService {
     from(this.sectorsCollection.add(sector));
   }
 
+  getSectors():Observable<Sector[]> {
+    return this.fireStore
+      .collection<Sector>('Sectors').valueChanges();
+  }
 }
