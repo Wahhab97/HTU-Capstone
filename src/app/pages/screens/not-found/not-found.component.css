@@ -4,11 +4,11 @@ p, h1 {
   text-align: center;
 }
 div {
-  background-image: url("../../../../assets/images/404.jpeg");
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/htu-capstone-ward.appspot.com/o/assets%2F404.png?alt=media&token=c4b0db15-d4ec-4dbf-8ff7-a5f338341eff");
   background-size: cover;
   background-position-y: center;
   background-position-x: 70%;
-  color: white;
+  color: black;
   height: calc(100vh - 124px);
   display: flex;
   flex-direction: column;
@@ -20,6 +20,12 @@ div {
 }
 h1 {
   font-size: 4em;
+  background-color: rgba(206, 218, 241, 0.51);
+  padding: 0.5em;
+}
+p {
+  padding: 0.5em;
+  background-color: rgba(206, 218, 241, 0.51);
 }
 @media (max-width: 599px) {
   div {
