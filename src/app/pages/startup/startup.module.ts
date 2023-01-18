@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { StartupRoutingModule } from './startup-routing.module';
 import { StartupComponent } from './startup/startup.component';
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { StartupComponent } from './startup/startup.component';
   ],
   imports: [
     CommonModule,
-    StartupRoutingModule
+    StartupRoutingModule,
+    MatButtonModule
   ]
 })
 export class StartupModule { }

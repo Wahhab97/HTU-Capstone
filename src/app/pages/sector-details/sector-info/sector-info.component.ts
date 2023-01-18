@@ -17,7 +17,6 @@ export class SectorInfoComponent implements OnInit{
 
   ngOnInit() {
     this.name = this.route.snapshot.paramMap.get('sectorName');
-    console.log(this.name);
     if(this.name){
       this.startupsService.getStartupsBySector(this.name).subscribe({
         next: value => {

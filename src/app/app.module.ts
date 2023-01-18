@@ -33,7 +33,7 @@ import {StartupComponent} from "./pages/startup/startup/startup.component";
     HomeComponent,
     NotFoundComponent,
     SectorComponent,
-    StartupComponent
+    // StartupComponent
   ],
   imports: [
     BrowserModule,

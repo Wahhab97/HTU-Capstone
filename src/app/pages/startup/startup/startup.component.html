@@ -1,1 +1,25 @@
-<p>startup works!</p>
+<div class="page-container">
+  <h1>{{name}}</h1>
+  <div class="details">
+    <div class="image">
+      <img [src]="showObj.logo" [alt]="showObj.companyName+' logo'">
+    </div>
+    <div class="info">
+      <div class="col1">
+        <h3 *ngIf="showObj.founder">Founder: {{showObj.founder}}</h3>
+        <h3 *ngIf="showObj.numOfEmployees">Number of Employees: {{showObj.numOfEmployees}}</h3>
+        <h3 *ngIf="showObj.yearOfEstablishment">Year of Establishment: {{showObj.yearOfEstablishment}}</h3>
+        <h3>City: {{showObj.city}}</h3>
+      </div>
+      <div class="col2">
+        <h3 *ngIf="showObj.website">Website: <a [href]="showObj.website" target="_blank">{{showObj.website}}</a></h3>
+        <h3 *ngIf="showObj.email">Email: <a [href]="'mailto:'+showObj.email">{{showObj.email}}</a></h3>
+        <h3 *ngIf="showObj.phone">Phone: <a [href]="'tel:'+showObj.phone">{{showObj.phone}}</a></h3>
+        <div class="sectors">
+          <h3>Sectors:</h3>
+          <button mat-raised-button color="accent" *ngFor="let sec of showObj.sector" (click)="goToSector(sec)">{{sec}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

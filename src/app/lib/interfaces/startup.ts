@@ -13,5 +13,6 @@ export interface Startup {
   location?: {
     latitude: string,
     longitude: string
-  }
+  },
+  [key: string]: any
 }

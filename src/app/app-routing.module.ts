@@ -30,6 +30,11 @@ const routes: Routes = [
     loadChildren: () => import("./pages/sector-details/sector-details.module")
       .then(m => m.SectorDetailsModule),
   },
+  {
+    path: "startups",
+    loadChildren: () => import("./pages/startup/startup.module")
+      .then(m => m.StartupModule)
+  },
 
   {path: "**", component: NotFoundComponent}
 ];
