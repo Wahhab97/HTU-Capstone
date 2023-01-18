@@ -1,0 +1,10 @@
+.container {
+  overflow-x: auto;
+}
+table {
+  border: 1px solid lightgray;
+  margin-top: 1em;
+}
+table td img {
+  max-width: 100%;
+}

@@ -15,6 +15,10 @@ export class StartupsService {
   addStartup(startup: Startup) {
     from(this.starupsCollection.add(startup));
   }
+  getStartups(): Observable<Startup[]> {
+    return this.firestore
+      .collection<Startup>("Startups").valueChanges();
+  }
   getStartupsBySector(sectorName: String): Observable<Startup[]> {
     return this.firestore
       .collection<Startup>("Startups", ref => ref.where("sector", "array-contains", sectorName)).valueChanges();

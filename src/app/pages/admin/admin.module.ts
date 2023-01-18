@@ -7,14 +7,16 @@ import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { CreateStartupComponent } from './create-startup/create-startup.component';
 import {MaterialModule} from "../../material/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FiltersComponent} from "../../lib/components/filters/filters.component";
 
 
 @NgModule({
-  declarations: [
-    AdminDashboardComponent,
-    CreateAdminComponent,
-    CreateStartupComponent
-  ],
+    declarations: [
+        AdminDashboardComponent,
+        CreateAdminComponent,
+        CreateStartupComponent,
+        FiltersComponent
+    ],
   imports: [
     CommonModule,
     AdminRoutingModule,

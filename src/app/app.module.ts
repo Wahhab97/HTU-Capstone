@@ -21,7 +21,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { SectorComponent } from './lib/components/sector/sector.component';
 import {CommonModule} from "@angular/common";
-import {StartupComponent} from "./pages/startup/startup/startup.component";
+
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import {StartupComponent} from "./pages/startup/startup/startup.component";
     HomeComponent,
     NotFoundComponent,
     SectorComponent,
-    // StartupComponent
+
   ],
   imports: [
     BrowserModule,
