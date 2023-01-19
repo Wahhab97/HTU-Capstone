@@ -21,6 +21,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { SectorComponent } from './lib/components/sector/sector.component';
 import {CommonModule} from "@angular/common";
+import { DeleteComponent } from './lib/components/delete/delete.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {CommonModule} from "@angular/common";
     HomeComponent,
     NotFoundComponent,
     SectorComponent,
+    DeleteComponent,
 
   ],
   imports: [

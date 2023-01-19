@@ -6,6 +6,8 @@ import {Startup} from "../../../lib/interfaces/startup";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {Filter} from "../../../lib/interfaces/filter";
+import {MatDialog} from "@angular/material/dialog";
+import {DeleteComponent} from "../../../lib/components/delete/delete.component";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -17,43 +19,42 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit{
   startups: Startup[] = [];
   dataSource = new MatTableDataSource<Startup>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns = ['logo', 'name', 'city', 'founder', 'numOfEmployees', 'yearOfEstablishment', 'website', 'email', 'phone']
-  constructor(private startupService: StartupsService, private router: Router, private sectorsService: SectorsService) {}
+  displayedColumns = ['logo', 'name', 'city', 'founder', 'numOfEmployees', 'yearOfEstablishment', 'website', 'email', 'phone', 'actions']
+  constructor(private startupService: StartupsService, private router: Router, private sectorsService: SectorsService, public dialog: MatDialog) {}
   ngOnInit() {
-    this.startupService.getStartups().subscribe({
-      next: (value) => {
-        if(value.length > 0) {
-          this.startups = value;
-          this.dataSource.data = this.startups;
-        }
-      },
-      error: err => {
-        console.error(err);
-      }
-    });
+    this.startupService.getStartups().subscribe(this.startupsObserver);
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-
+  startupsObserver = {
+    next: (value: Startup[]) => {
+      if(value[0]) {
+        this.dataSource.data = value;
+        return;
+      }
+    },
+    error: (err: Error) => console.error(err)
+  };
   addedFilter(filter: Filter) {
-    let filterObserver = {
-      next: (value: Startup[]) => {
-        if(value[0]) {
-          this.dataSource.data = value;
-          return;
-        }
-      },
-      error: (err: Error) => console.error(err)
-    };
     if(filter) {
       if(filter.comName) {
-        this.startupService.getStartupByName(filter.comName).subscribe(filterObserver);
+        this.startupService.getStartupByName(filter.comName).subscribe(this.startupsObserver);
       } else if(filter.sectors) {
         if(filter.sectors[0]){
-           this.startupService.getStartupsBySectors(filter.sectors).subscribe(filterObserver);
+           this.startupService.getStartupsBySectors(filter.sectors).subscribe(this.startupsObserver);
         }
       }
     }
+  }
+  deleteStartup(startupName: string, startupId: string){
+    console.log(startupName);
+    let dialogRef = this.dialog.open(DeleteComponent, {
+      width: '500px',
+      data: {name: startupName, id: startupId}
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.startupService.getStartups().subscribe(this.startupsObserver);
+    })
   }
 }

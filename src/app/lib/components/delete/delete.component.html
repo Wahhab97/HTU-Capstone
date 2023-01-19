@@ -1,0 +1,11 @@
+<div class="container">
+  <h2>Delete</h2>
+  <div mat-dialog-content>
+    Would you like to delete {{data.name}}?
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close color="accent">Cancel</button>
+    <button mat-raised-button (click)="confirm()" color="warn">Delete</button>
+  </div>
+
+</div>
