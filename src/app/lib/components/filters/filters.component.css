@@ -1,0 +1,17 @@
+form {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 0.5em;
+  align-items: center;
+}
+mat-form-field {
+  width: 40%;
+}
+@media (max-width: 570px) {
+  form {
+    flex-direction: column;
+  }
+  form * {
+    width: 90%;
+  }
+}

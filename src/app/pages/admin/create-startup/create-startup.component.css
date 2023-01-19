@@ -41,8 +41,4 @@
 .location * {
   flex: 1;
 }
-/*@media (max-width: 449px) {*/
-/*  .logo {*/
-/*    flex-direction: column;*/
-/*  }*/
-/*}*/
+

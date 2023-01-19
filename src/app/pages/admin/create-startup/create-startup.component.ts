@@ -1,17 +1,21 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {locationMatcher, locationValidator} from "./locationValidator";
 import {FilestorageService} from "../../../lib/services/storage/filestorage.service";
 import {StartupsService} from "../../../lib/services/startups/startups.service";
+import {SectorsService} from "../../../lib/services/sectors/sectors.service";
+import {Sector} from "../../../lib/interfaces/sector";
 
 @Component({
   selector: 'app-create-startup',
   templateUrl: './create-startup.component.html',
   styleUrls: ['./create-startup.component.css']
 })
-export class CreateStartupComponent {
-  constructor(private router: Router, private storage: FilestorageService, private startupsService: StartupsService) {}
+export class CreateStartupComponent implements OnInit{
+  constructor(private router: Router, private storage: FilestorageService, private startupsService: StartupsService, private sectorsService:SectorsService) {
+
+  }
 
   startupsForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
@@ -63,9 +67,23 @@ export class CreateStartupComponent {
   get longitude() {
     return this.startupsForm.get('longitude')?.value;
   }
-  sectors = ['edtech', 'healthtech', 'sporttech', 'crypto', 'agritech'];
+  sectors: String[] = [];
   imgSrc = "";
   fileToUpload:any;
+
+  ngOnInit() {
+    this.sectorsService.getSectors().subscribe({
+      next: (value:Sector[]) => {
+        if(value) {
+          value.forEach((sec) => {
+            this.sectors.push(sec.sectorName);
+          })
+        }
+      },
+      error: err => console.error(err)
+    });
+  }
+
   preview(target: any) {
     if(target.files) {
       this.fileToUpload = target.files.item(0);

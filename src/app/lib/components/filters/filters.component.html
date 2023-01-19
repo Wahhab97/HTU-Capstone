@@ -8,5 +8,23 @@
       {{panelOpenState ? 'Close' : 'Open'}} Filters
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <p>I'm visible because I am open</p>
+  <form [formGroup]="filersForm" (ngSubmit)="addFilter({sectors: filersForm.controls.sector.value, comName: filersForm.controls.comName.value})">
+    <mat-form-field appearance="fill">
+      <mat-label>Sectors</mat-label>
+      <mat-select formControlName="sector" multiple>
+        <mat-option
+            [disabled]="filersForm.get('sector')?.value?.length > 9 && !filersForm.get('sector')?.value?.includes(sector)"
+            *ngFor="let sector of sectors"
+            [value]="sector">
+          {{sector}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Company Name</mat-label>
+      <input matInput id="comName" name="comName" formControlName="comName">
+    </mat-form-field>
+    <button mat-raised-button color="primary">Search</button>
+  </form>
+
 </mat-expansion-panel>

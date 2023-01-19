@@ -7,13 +7,13 @@ import {from, Observable} from "rxjs";
   providedIn: 'root'
 })
 export class StartupsService {
-  starupsCollection!: AngularFirestoreCollection<Startup>;
+  startupsCollection!: AngularFirestoreCollection<Startup>;
   constructor(private firestore: AngularFirestore) {
-    this.starupsCollection = this.firestore.collection('Startups');
+    this.startupsCollection = this.firestore.collection('Startups');
   }
 
   addStartup(startup: Startup) {
-    from(this.starupsCollection.add(startup));
+    from(this.startupsCollection.add(startup));
   }
   getStartups(): Observable<Startup[]> {
     return this.firestore
@@ -23,6 +23,10 @@ export class StartupsService {
     return this.firestore
       .collection<Startup>("Startups", ref => ref.where("sector", "array-contains", sectorName)).valueChanges();
   };
+  getStartupsBySectors(sectorsArray: string[]): Observable<Startup[]> {
+    return this.firestore
+      .collection<Startup>("Startups", ref => ref.where("sector", "array-contains-any", sectorsArray)).valueChanges()
+  }
   getStartupByName(name: string): Observable<Startup[]> {
     return this.firestore
       .collection<Startup>('Startups', ref => ref.where("companyName", "==", name)).valueChanges();

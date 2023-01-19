@@ -5,6 +5,7 @@ import {SectorsService} from "../../../lib/services/sectors/sectors.service";
 import {Startup} from "../../../lib/interfaces/startup";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
+import {Filter} from "../../../lib/interfaces/filter";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -33,5 +34,26 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit{
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  addedFilter(filter: Filter) {
+    let filterObserver = {
+      next: (value: Startup[]) => {
+        if(value[0]) {
+          this.dataSource.data = value;
+          return;
+        }
+      },
+      error: (err: Error) => console.error(err)
+    };
+    if(filter) {
+      if(filter.comName) {
+        this.startupService.getStartupByName(filter.comName).subscribe(filterObserver);
+      } else if(filter.sectors) {
+        if(filter.sectors[0]){
+           this.startupService.getStartupsBySectors(filter.sectors).subscribe(filterObserver);
+        }
+      }
+    }
   }
 }

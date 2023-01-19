@@ -1,5 +1,5 @@
 <div class="page-container">
-  <app-filters></app-filters>
+  <app-filters (filterEvent)="addedFilter($event)"></app-filters>
   <div class="container">
     <table mat-table class="mat-elevation-z8" [dataSource]="dataSource">
       <ng-container matColumnDef="logo">
