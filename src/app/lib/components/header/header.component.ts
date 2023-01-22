@@ -28,7 +28,8 @@ export class HeaderComponent {
     this.router.navigate([location]);
   }
   logOut(){
-    this.auth.logOut();
-    this.router.navigate(['']);
+    this.auth.logOut().then(() => {
+        this.router.navigate(['/'])
+    });
   }
 }

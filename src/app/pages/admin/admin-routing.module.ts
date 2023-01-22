@@ -4,6 +4,7 @@ import {AdminDashboardComponent} from "./admin-dashboard/admin-dashboard.compone
 import {CreateAdminComponent} from "./create-admin/create-admin.component";
 import {SuperAdminAuthGuard} from "../../lib/guards/super-admin-auth.guard";
 import {CreateStartupComponent} from "./create-startup/create-startup.component";
+import {EditStartupComponent} from "./edit-startup/edit-startup.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'createStartup',
     component: CreateStartupComponent
+  },
+  {
+    path: 'edit/:startupName',
+    component: EditStartupComponent
   }
 ];
 

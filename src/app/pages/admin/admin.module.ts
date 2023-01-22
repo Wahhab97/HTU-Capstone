@@ -8,6 +8,7 @@ import { CreateStartupComponent } from './create-startup/create-startup.componen
 import {MaterialModule} from "../../material/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FiltersComponent} from "../../lib/components/filters/filters.component";
+import { EditStartupComponent } from './edit-startup/edit-startup.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {FiltersComponent} from "../../lib/components/filters/filters.component";
         AdminDashboardComponent,
         CreateAdminComponent,
         CreateStartupComponent,
-        FiltersComponent
+        FiltersComponent,
+        EditStartupComponent
     ],
   imports: [
     CommonModule,

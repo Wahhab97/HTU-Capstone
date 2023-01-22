@@ -1,0 +1,43 @@
+.logo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  margin-bottom: 1.5em;
+  justify-content: center;
+  gap: 0.5em;
+  background-color: #f5f5f5;
+  padding: 1em 0;
+  border-bottom: 1px solid #8e8e8e;
+  border-radius: 5px 5px 0 0;
+}
+.input-div {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3em;
+}
+.input-div label {
+  margin-right: 1em;
+}
+.img-div {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border: 3px dashed black;
+}
+.img-div img {
+  max-width: 100%;
+}
+.location {
+  display: flex;
+  gap: 0.5em;
+}
+.location * {
+  flex: 1;
+}

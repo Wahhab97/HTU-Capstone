@@ -37,6 +37,6 @@ export class AuthService {
   }
 
   logOut() {
-    this.fireAuth.signOut();
+    return this.fireAuth.signOut();
   }
 }

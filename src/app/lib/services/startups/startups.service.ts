@@ -31,6 +31,10 @@ export class StartupsService {
     return this.firestore
       .collection<Startup>('Startups', ref => ref.where("companyName", "==", name)).valueChanges({"idField":'id'});
   }
+
+  updateStartup(id: string, startup: {}){
+    return from(this.startupsCollection.doc(id).update({...startup}));
+  }
   deleteStartup(id: string){
     return from(this.startupsCollection.doc(id).delete());
   }
