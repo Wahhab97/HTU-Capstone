@@ -1,7 +1,7 @@
 <div class="container">
   <h3>{{childSector.sectorName}}</h3>
   <div class="logos-container">
-    <a routerLink="auth/login"><img src="./assets/images/logo.png" alt="logo"></a>
+    <a [routerLink]="['startups', s.companyName]" *ngFor="let s of startups"><img [src]="s.logo" [alt]="s.companyName + ' logo'"></a>
   </div>
   <button mat-raised-button color="accent" (click)="goToSector(childSector.sectorName)">See Details</button>
 </div>
