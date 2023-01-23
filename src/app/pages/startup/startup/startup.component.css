@@ -20,7 +20,7 @@ h1 {
 }
 .details>.info {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .details>.info>.col2>.sectors>button {
   margin-right: 3px;

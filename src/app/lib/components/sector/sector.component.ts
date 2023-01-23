@@ -22,7 +22,6 @@ export class SectorComponent implements OnInit{
         }
       }
     });
-    console.log(this.startups);
   }
 
   goToSector(val:string) {

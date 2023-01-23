@@ -15,7 +15,6 @@ import {FilestorageService} from "../../../lib/services/storage/filestorage.serv
 })
 export class EditStartupComponent implements OnInit{
   startup?: Startup;
-  comparisonStartup?: Startup
   startup$?: Observable<Startup[] | undefined>;
   startupName!: string;
   constructor(private route: ActivatedRoute, private router: Router, private startupsService: StartupsService, private sectorsService: SectorsService, private storage: FilestorageService) {
@@ -30,7 +29,6 @@ export class EditStartupComponent implements OnInit{
         if(value) {
           if(value[0]){
             this.startup = value[0];
-            this.comparisonStartup = {...value[0]};
             this.editStartupForm.patchValue({
               name: this.startup.companyName,
               // logo:this.startup.logo,
@@ -128,35 +126,54 @@ export class EditStartupComponent implements OnInit{
   }
 
   updateStartup() {
-    if (this.editStartupForm.controls.logo.value && this.startup) {
-      this.storage.deleteFile(this.startup.logo).subscribe({
-        next: () => {
-          this.storage.uploadFile(this.fileToUpload).subscribe({
-            next: (value) => {
-              if (this.sector && this.startup) {
-                return this.startupsService.updateStartup(this.startup.id + "", {
-                  companyName: this.name + "",
-                  logo: value,
-                  sector: this.sector,
-                  city: this.city + "",
-                  founder: this.founder + "",
-                  numOfEmployees: this.numOfEmployees + "",
-                  yearOfEstablishment: this.yearOfEstablishment + "",
-                  website: this.website + "",
-                  email: this.email + "",
-                  phone: this.phone + "",
-                  location: {
-                    longitude: this.longitude + "",
-                    latitude: this.latitude + ""
-                  }
-                });
-              }
-              return;
-            },
-            error: (err: Error) => console.error(err),
-          })
-        }
-      })
+    if(this.startup){
+      if (this.editStartupForm.controls.logo.value) {
+        this.storage.deleteFile(this.startup.logo).subscribe({
+          next: () => {
+            this.storage.uploadFile(this.fileToUpload).subscribe({
+              next: (value) => {
+                if (this.sector && this.startup) {
+                  return this.startupsService.updateStartup(this.startup.id + "", {
+                    companyName: this.name + "",
+                    logo: value,
+                    sector: this.sector,
+                    city: this.city + "",
+                    founder: this.founder + "",
+                    numOfEmployees: this.numOfEmployees + "",
+                    yearOfEstablishment: this.yearOfEstablishment + "",
+                    website: this.website + "",
+                    email: this.email + "",
+                    phone: this.phone + "",
+                    location: {
+                      longitude: this.longitude + "",
+                      latitude: this.latitude + ""
+                    }
+                  });
+                }
+                return;
+              },
+              error: (err: Error) => console.error(err),
+            })
+          }
+        })
+      } else {
+        this.startupsService.updateStartup(this.startup.id+'', {
+          companyName: this.name + "",
+          logo: this.startup.logo,
+          sector: this.sector,
+          city: this.city + "",
+          founder: this.founder + "",
+          numOfEmployees: this.numOfEmployees + "",
+          yearOfEstablishment: this.yearOfEstablishment + "",
+          website: this.website + "",
+          email: this.email + "",
+          phone: this.phone + "",
+          location: {
+            longitude: this.longitude + "",
+            latitude: this.latitude + ""
+          }
+        }).subscribe()
+      }
     }
     this.router.navigate(['']);
   }

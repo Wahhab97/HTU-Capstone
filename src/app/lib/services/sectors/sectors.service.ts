@@ -15,9 +15,12 @@ export class SectorsService {
   addSector(sector: Sector) {
     from(this.sectorsCollection.add(sector));
   }
-
+  getSectorByName(sectorName: string): Observable<Sector[]> {
+    return this.fireStore
+      .collection<Sector>('Sectors', ref => ref.where('sectorName', 'array-contains', sectorName)).valueChanges()
+  }
   getSectors():Observable<Sector[]> {
     return this.fireStore
-      .collection<Sector>('Sectors').valueChanges();
+      .collection<Sector>('Sectors').valueChanges({'idField': 'id'});
   }
 }
