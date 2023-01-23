@@ -15,15 +15,15 @@ import {AuthService} from "../services/auth/auth.service";
 @Injectable({
   providedIn: 'root'
 })
-export class AdminAuthGuard implements CanLoad, CanActivate {
+export class UserAuthGuard implements CanLoad, CanActivate {
   constructor(private auth: AuthService, private router: Router) {}
   guard$ = this.auth.userState$.pipe(
     map((val) => {
-      if(val?.role === 'super-admin' || val?.role === 'admin'){
+      if(val?.role === "user") {
         return true;
       }
       this.router.navigate(['auth/login']);
-      return false
+      return false;
     })
   );
   canLoad(

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
 import {AuthService} from "../../../lib/services/auth/auth.service";
+import {of, switchMap} from "rxjs";
+import {User} from "../../../lib/interfaces/user";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,7 +25,23 @@ export class LoginComponent {
   login() {
     this.auth.signIn(this.email+"", this.password+"")
       .then((val) => {
-        this.router.navigate(['admin/']);
+        this.auth.userState$.pipe(
+          switchMap((val)=>{
+            if(!val) {
+              return of(null);
+            } else {
+              return of(val);
+            }
+          })
+        ).subscribe({
+          next: (val) => {
+            if(val?.role === 'admin' || val?.role === 'super-admin'){
+              this.router.navigate(['admin/']);
+            } else if (val?.role === 'user') {
+              this.router.navigate(['users', val.id])
+            }
+          },
+        });
       }).catch((error) => {
         console.log(error);
     });
