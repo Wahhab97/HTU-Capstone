@@ -1,15 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {RequestsService} from "../../../lib/services/requests/requests.service";
 
 @Component({
   selector: 'app-request',
   templateUrl: './request.component.html',
   styleUrls: ['./request.component.css']
 })
-export class RequestComponent implements OnInit{
-  constructor(private route: ActivatedRoute) {}
+export class RequestComponent {
+  constructor(
+    private route: ActivatedRoute,
+    private requestsService: RequestsService,
+  ) {}
+  storagePath = 'requestImages';
+  collectionPath = 'Requests';
 
-  ngOnInit() {
-    console.log(this.route.snapshot.paramMap.get('id'));
-  }
 }

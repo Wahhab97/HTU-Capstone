@@ -1,0 +1,67 @@
+<form [formGroup]="startupsForm" (ngSubmit)="submitForm()">
+  <mat-form-field>
+    <mat-label for="name">Company Name</mat-label>
+    <input matInput id="name" name="name" formControlName="name">
+    <mat-error *ngIf="startupsForm.controls['name'].hasError('required')">Company Name is Required</mat-error>
+  </mat-form-field>
+
+  <div class="logo">
+    <div class="input-div">
+      <label for="logo">Insert Logo</label>
+      <input id="logo" name="logo" type="file" accept="image/*" required formControlName="logo" (change)="preview($event.target)">
+    </div>
+    <div class="img-div">
+      <img [src]="imgSrc">
+    </div>
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Sectors</mat-label>
+    <mat-select formControlName="sector" multiple>
+      <mat-option *ngFor="let sector of sectors" [value]="sector">{{sector}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>City</mat-label>
+    <input matInput id="city" name="city" formControlName="city">
+    <mat-error *ngIf="startupsForm.controls['city'].hasError('required')">City is Required</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Founder</mat-label>
+    <input matInput id="founder" name="founder" formControlName="founder">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Number of Employees</mat-label>
+    <input matInput id="numOfEmployees" name="numOfEmployees" formControlName="numOfEmployees" type="number">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Year of Establishment</mat-label>
+    <input matInput id="yearOfEstablishment" name="yearOfEstablishment" formControlName="yearOfEstablishment" type="number">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Website</mat-label>
+    <input matInput id="website" name="website" formControlName="website">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput id="email" name="email" formControlName="email">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Phone</mat-label>
+    <input matInput id="phone" name="phone" formControlName="phone">
+  </mat-form-field>
+  <div class="location">
+    <mat-form-field>
+      <mat-label>Latitude</mat-label>
+      <input matInput type="number" id="latitude" name="latitude" [errorStateMatcher]="matcher" formControlName="latitude">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Longitude</mat-label>
+      <input matInput type="number" id="longitude" name="longitude" [errorStateMatcher]="matcher" formControlName="longitude">
+    </mat-form-field>
+  </div>
+  <small *ngIf="startupsForm.hasError('locationIsNotValid')">Enter a valid location</small>
+  <button mat-raised-button color="primary" [disabled]="startupsForm.invalid">Create Startup</button>
+
+</form>

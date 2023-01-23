@@ -8,8 +8,8 @@ import {last, switchMap} from "rxjs";
 export class FilestorageService {
   constructor(private fireStorage: AngularFireStorage) { }
 
-  uploadFile(file: File) {
-    const filePath = `logos/${file.name}`;
+  uploadFile(path: string,file: File) {
+    const filePath = `${path}/${file.name}`;
     const storageRef = this.fireStorage.ref(filePath);
     return storageRef.put(file).snapshotChanges()
       .pipe(

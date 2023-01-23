@@ -22,6 +22,7 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { SectorComponent } from './lib/components/sector/sector.component';
 import {CommonModule} from "@angular/common";
 import { DeleteComponent } from './lib/components/delete/delete.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -35,21 +36,21 @@ import { DeleteComponent } from './lib/components/delete/delete.component';
     NotFoundComponent,
     SectorComponent,
     DeleteComponent,
-
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    AngularFirestoreModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    AngularFireStorageModule,
-    CommonModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        AngularFirestoreModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        AngularFireStorageModule,
+        CommonModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   exports: [
 

@@ -130,7 +130,7 @@ export class EditStartupComponent implements OnInit{
       if (this.editStartupForm.controls.logo.value) {
         this.storage.deleteFile(this.startup.logo).subscribe({
           next: () => {
-            this.storage.uploadFile(this.fileToUpload).subscribe({
+            this.storage.uploadFile("logos",this.fileToUpload).subscribe({
               next: (value) => {
                 if (this.sector && this.startup) {
                   return this.startupsService.updateStartup(this.startup.id + "", {

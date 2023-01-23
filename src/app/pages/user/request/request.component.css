@@ -1,0 +1,7 @@
+.form-container{
+  width: clamp(50%, 700px, 98%);
+  margin-inline: auto;
+}
+.form-container > * {
+  width: 100%
+}

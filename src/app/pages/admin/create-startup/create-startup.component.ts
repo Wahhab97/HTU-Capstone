@@ -97,7 +97,7 @@ export class CreateStartupComponent implements OnInit{
   }
 
   createStartup() {
-    this.storage.uploadFile(this.fileToUpload).subscribe({
+    this.storage.uploadFile('logos',this.fileToUpload).subscribe({
       next: (value) => {
         if(this.sector) {
           return this.startupsService.addStartup({
