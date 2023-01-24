@@ -1,53 +1,22 @@
-<mat-toolbar color="primary" class="sticky" *ngIf="!(state$ | async); else LoggedIn">
+<mat-toolbar color="primary" class="sticky">
   <a>
     <img src="https://firebasestorage.googleapis.com/v0/b/htu-capstone-ward.appspot.com/o/assets%2Flogo.png?alt=media&token=e7c34955-181d-454c-a671-a6c9050c4fe2" alt="logo">
   </a>
   <ul>
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/about">About</a></li>
-    <li><a routerLink="#contact">Contact</a></li>
+    <li *ngFor="let item of barItems"><a [routerLink]="item.itemPath">{{item.itemName}}</a></li>
   </ul>
-  <button mat-flat-button color="accent" (click)="navigation('auth/login')">Login</button>
-  <button mat-icon-button aria-label="icon button with a menu icon" [matMenuTriggerFor]="menu" class="menu-button">
+  <button mat-flat-button color="accent" (click)="navigation('auth/login')" *ngIf="!(state$ | async); else Logout">Login</button>
+  <ng-template #Logout>
+    <button mat-flat-button color="accent" (click)="logOut()">Logout</button>
+  </ng-template>
+
+  <button mat-icon-button aria-label="icon button with a menu icon" [matMenuTriggerFor]="men" class="menu-button">
     <mat-icon>menu</mat-icon>
   </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="navigation('')">
-      <span>Home</span>
-    </button>
-    <button mat-menu-item (click)="navigation('about')">
-      <span>About</span>
-    </button>
-    <button mat-menu-item (click)="navigation('#contact')">
-      <span>Contact</span>
+  <mat-menu #men="matMenu">
+    <button mat-menu-item (click)="navigation(item.itemPath)" *ngFor="let item of barItems">
+      <span>{{item.itemName}}</span>
     </button>
   </mat-menu>
 </mat-toolbar>
-<ng-template #LoggedIn>
-  <mat-toolbar color="primary" class="sticky" >
-    <a>
-      <img src="https://firebasestorage.googleapis.com/v0/b/htu-capstone-ward.appspot.com/o/assets%2Flogo.png?alt=media&token=e7c34955-181d-454c-a671-a6c9050c4fe2" alt="logo" alt="logo">
-    </a>
-    <ul>
-      <li><a routerLink="/admin">Home</a></li>
-      <li><a routerLink="/admin/createAdmin">creat admin</a></li>
-      <li><a routerLink="/admin/createStartup">create startup</a></li>
-    </ul>
-    <button mat-flat-button color="accent" (click)="logOut()">Logout</button>
-    <button mat-icon-button aria-label="icon button with a menu icon" [matMenuTriggerFor]="menu" class="menu-button">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="navigation('admin')">
-        <span>Home</span>
-      </button>
-      <button mat-menu-item (click)="navigation('admin/createAdmin')">
-        <span>create admin</span>
-      </button>
-      <button mat-menu-item (click)="navigation('admin/createStartup')">
-        <span>create startup</span>
-      </button>
-    </mat-menu>
-  </mat-toolbar>
-</ng-template>
 
