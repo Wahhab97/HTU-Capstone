@@ -9,6 +9,7 @@ import {MaterialModule} from "../../material/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FiltersComponent} from "../../lib/components/filters/filters.component";
 import { EditStartupComponent } from './edit-startup/edit-startup.component';
+import { ViewRequestsComponent } from './view-requests/view-requests.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { EditStartupComponent } from './edit-startup/edit-startup.component';
         CreateAdminComponent,
         CreateStartupComponent,
         FiltersComponent,
-        EditStartupComponent
+        EditStartupComponent,
+        ViewRequestsComponent
     ],
   imports: [
     CommonModule,

@@ -15,8 +15,6 @@ import {DeleteComponent} from "../../../lib/components/delete/delete.component";
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit, AfterViewInit{
-
-  startups: Startup[] = [];
   dataSource = new MatTableDataSource<Startup>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns = ['logo', 'name', 'city', 'founder', 'numOfEmployees', 'yearOfEstablishment', 'website', 'email', 'phone', 'actions']
@@ -48,10 +46,9 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit{
     }
   }
   deleteStartup(startupName: string, startupId: string){
-    console.log(startupName);
     let dialogRef = this.dialog.open(DeleteComponent, {
       width: '500px',
-      data: {name: startupName, id: startupId}
+      data: {name: startupName, id: startupId, caller: 'admin-dashboard'}
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.startupService.getStartups().subscribe(this.startupsObserver);

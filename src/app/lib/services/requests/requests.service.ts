@@ -16,4 +16,11 @@ export class RequestsService {
   addRequest(startup: Startup) {
     from(this.requestCollection.add(startup));
   }
+  getRequests(): Observable<Startup[]> {
+    return this.firestore
+      .collection<Startup>('Requests').valueChanges({"idField": 'id'})
+  }
+  deleteRequest(id: string) {
+    return from(this.requestCollection.doc(id).delete())
+  }
 }

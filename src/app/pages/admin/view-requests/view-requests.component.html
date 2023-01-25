@@ -1,5 +1,4 @@
 <div class="page-container">
-  <app-filters (filterEvent)="addedFilter($event)"></app-filters>
   <div class="container">
     <table mat-table class="mat-elevation-z8" [dataSource]="dataSource">
       <ng-container matColumnDef="logo">
@@ -42,11 +41,11 @@
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element">
           <div class="actions">
-            <a [routerLink]="['edit', element.companyName]">
-              <mat-icon>edit</mat-icon>
-            </a>
-            <button mat-icon-button (click)="deleteStartup(element.companyName, element.id)">
-              <mat-icon>delete</mat-icon>
+            <button mat-icon-button class="reject" (click)="reject(element.companyName, element.id, element.logo)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+            <button mat-icon-button class="approve" (click)="approve(element)">
+              <mat-icon>check_circle</mat-icon>
             </button>
           </div>
         </td>

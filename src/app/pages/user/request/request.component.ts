@@ -12,7 +12,7 @@ export class RequestComponent {
     private route: ActivatedRoute,
     private requestsService: RequestsService,
   ) {}
-  storagePath = 'requestImages';
+  storagePath = 'logos';
   collectionPath = 'Requests';
 
 }
