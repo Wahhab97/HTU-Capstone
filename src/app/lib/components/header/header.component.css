@@ -34,7 +34,7 @@ button.menu-button {
   display: flex;
   justify-content: space-between;
 }
-@media (max-width: 599px){
+@media (max-width: 765px){
   ul {
     display: none;
   }

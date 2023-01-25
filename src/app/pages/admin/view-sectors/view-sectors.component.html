@@ -14,6 +14,14 @@
       <th mat-header-cell *matHeaderCellDef>Number of Startups</th>
       <td mat-cell *matCellDef="let element">{{element.count}}</td>
     </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Delete Sector</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="button with delete icon" (click)="deleteSector(element.id, element.count)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

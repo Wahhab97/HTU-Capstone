@@ -16,5 +16,6 @@ export class CreateSectorComponent {
     else {
       console.error('Enter a valid name!')
     }
+    this.dialogRef.close(true);
   }
 }

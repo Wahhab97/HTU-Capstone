@@ -17,10 +17,16 @@ export class SectorsService {
   }
   getSectorByName(sectorName: string): Observable<Sector[]> {
     return this.fireStore
-      .collection<Sector>('Sectors', ref => ref.where('sectorName', 'array-contains', sectorName)).valueChanges()
+      .collection<Sector>('Sectors', ref => ref.where('sectorName', 'array-contains', sectorName)).valueChanges({"idField": "id"})
   }
   getSectors():Observable<Sector[]> {
     return this.fireStore
       .collection<Sector>('Sectors').valueChanges({'idField': 'id'});
+  }
+  changeSectorCount(id: string, newCount: number) {
+    return this.sectorsCollection.doc(id).update({count: newCount});
+  }
+  deleteSector(id: string) {
+    return this.sectorsCollection.doc(id).delete();
   }
 }

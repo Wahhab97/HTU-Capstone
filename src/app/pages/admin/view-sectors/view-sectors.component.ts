@@ -15,7 +15,7 @@ export class ViewSectorsComponent implements OnInit, AfterViewInit{
   constructor(private sectorsService: SectorsService, public dialog: MatDialog) {}
   dataSource = new MatTableDataSource<Sector>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns = ['sectorName', 'startupsCount'];
+  displayedColumns = ['sectorName', 'startupsCount', 'delete'];
 
   sectorObserver ={
     next: (val: Sector[]) => {
@@ -31,13 +31,21 @@ export class ViewSectorsComponent implements OnInit, AfterViewInit{
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+  deleteSector(id: string, count: number) {
+    if(count < 1) {
+      this.sectorsService.deleteSector(id);
+      return;
+    }else {
+      console.error("You can't delete a sector that has companies");
+    }
+  }
   createSector() {
     let dialogRef = this.dialog.open(CreateSectorComponent,{
       width: "500px",
       maxWidth: "95%",
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.sectorsService.getSectors().subscribe(this.sectorObserver);
+      this.sectorsService.getSectors();
     })
   }
 }
