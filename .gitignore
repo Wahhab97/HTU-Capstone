@@ -45,3 +45,7 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+#companies
+src/app/pages/admin/create-admin/companies.json
+src/assets/images
