@@ -21,7 +21,6 @@ export class HeaderComponent {
     this.state$ = auth.userState$.pipe(
       map((val) => {
         if(val) {
-          console.log(val);
           if(val.role === "user") {
             this.barItems = [
               {itemName: "Request", itemPath: ''},
@@ -47,7 +46,6 @@ export class HeaderComponent {
           {itemName: "About", itemPath: "about"},
           {itemName: "Contact", itemPath: "#contact"}
         ];
-        console.log(this.state$);
         return false;
       })
     );

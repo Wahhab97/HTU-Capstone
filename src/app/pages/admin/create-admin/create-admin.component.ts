@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-admin.component.css']
 })
 export class CreateAdminComponent {
-
+  iRole: "admin" = "admin";
 }

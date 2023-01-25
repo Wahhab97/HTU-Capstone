@@ -1,0 +1,6 @@
+form {
+  display: flex;
+  flex-direction: column;
+  width: clamp(50%, 700px, 95%);
+  margin-inline: auto;
+}

@@ -31,7 +31,6 @@ export class StartupComponent implements OnInit{
                 this.showObj[property] = this.startupObj[property];
               }
             }
-            console.log(this.showObj);
           }
           else {
             this.router.navigate(['404']);

@@ -10,16 +10,18 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FiltersComponent} from "../../lib/components/filters/filters.component";
 import { EditStartupComponent } from './edit-startup/edit-startup.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
+import {RegisterFormComponent} from "../../lib/components/register-form/register-form.component";
 
 
 @NgModule({
     declarations: [
-        AdminDashboardComponent,
-        CreateAdminComponent,
-        CreateStartupComponent,
-        FiltersComponent,
-        EditStartupComponent,
-        ViewRequestsComponent
+      AdminDashboardComponent,
+      CreateAdminComponent,
+      CreateStartupComponent,
+      FiltersComponent,
+      EditStartupComponent,
+      ViewRequestsComponent,
+      RegisterFormComponent
     ],
   imports: [
     CommonModule,
