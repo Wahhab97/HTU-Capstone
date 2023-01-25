@@ -29,13 +29,15 @@ export class HeaderComponent {
             this.barItems = [
               {itemName:'Home', itemPath:'admin'},
               {itemName:'Create Startup', itemPath: 'admin/createStartup'},
-              {itemName:'Requests', itemPath:"admin/requests"}
+              {itemName:'Requests', itemPath:"admin/requests"},
+              {itemName: 'Sectors', itemPath:"admin/sectors"}
             ];
           } else if(val.role === "super-admin") {
             this.barItems = [
               {itemName:'Home', itemPath:'admin'},
               {itemName:'Create Startup', itemPath: 'admin/createStartup'},
               {itemName:'Requests', itemPath:"admin/requests"},
+              {itemName: 'Sectors', itemPath:"admin/sectors"},
               {itemName: "Create Admin", itemPath:"admin/createAdmin"}
             ];
           }

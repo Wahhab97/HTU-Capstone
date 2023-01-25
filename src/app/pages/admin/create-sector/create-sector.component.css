@@ -1,0 +1,6 @@
+.dialog-container * {
+  padding-inline: 0.5em;
+}
+mat-form-field {
+  width: 95%;
+}

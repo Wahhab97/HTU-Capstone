@@ -1,0 +1,9 @@
+table {
+  border: 1px solid lightgray;
+  margin-bottom: 0.5em;
+}
+.page-container .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

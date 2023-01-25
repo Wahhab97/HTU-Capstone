@@ -6,6 +6,7 @@ import {SuperAdminAuthGuard} from "../../lib/guards/super-admin-auth.guard";
 import {CreateStartupComponent} from "./create-startup/create-startup.component";
 import {EditStartupComponent} from "./edit-startup/edit-startup.component";
 import {ViewRequestsComponent} from "./view-requests/view-requests.component";
+import {ViewSectorsComponent} from "./view-sectors/view-sectors.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: "requests",
     component: ViewRequestsComponent
+  },
+  {
+    path: "sectors",
+    component: ViewSectorsComponent
   }
 ];
 

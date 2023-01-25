@@ -11,6 +11,8 @@ import {FiltersComponent} from "../../lib/components/filters/filters.component";
 import { EditStartupComponent } from './edit-startup/edit-startup.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
 import {RegisterFormComponent} from "../../lib/components/register-form/register-form.component";
+import { ViewSectorsComponent } from './view-sectors/view-sectors.component';
+import { CreateSectorComponent } from './create-sector/create-sector.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {RegisterFormComponent} from "../../lib/components/register-form/register
       FiltersComponent,
       EditStartupComponent,
       ViewRequestsComponent,
-      RegisterFormComponent
+      RegisterFormComponent,
+      ViewSectorsComponent,
+      CreateSectorComponent
     ],
   imports: [
     CommonModule,

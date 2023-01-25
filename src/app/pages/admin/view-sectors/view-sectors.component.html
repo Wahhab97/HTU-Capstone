@@ -1,0 +1,24 @@
+<div class="page-container">
+  <div class="row">
+    <h1>Sectors</h1>
+    <button mat-icon-button aria-label="button with add icon" (click)="createSector()">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+  <table mat-table class="mat-elevation-z8" [dataSource]="dataSource">
+    <ng-container matColumnDef="sectorName">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{element.sectorName}}</td>
+    </ng-container>
+    <ng-container matColumnDef="startupsCount">
+      <th mat-header-cell *matHeaderCellDef>Number of Startups</th>
+      <td mat-cell *matCellDef="let element">{{element.count}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
