@@ -115,10 +115,11 @@ export class CreateStartupComponent implements OnInit{
               longitude: this.longitude+"",
               latitude: this.latitude+""
             }
-          })
+          });
         }
       },
       error: (err) => {console.error("Image upload error " + err)},
+      complete: () =>  this.router.navigate(['admin/'])
     });
   }
 }
