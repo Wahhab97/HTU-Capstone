@@ -46,7 +46,7 @@ export class HeaderComponent {
         this.barItems =[
           {itemName: "Home", itemPath: "/"},
           {itemName: "About", itemPath: "about"},
-          {itemName: "Contact", itemPath: "#contact"}
+          // {itemName: "Contact", itemPath: "#contact"}
         ];
         return false;
       })
