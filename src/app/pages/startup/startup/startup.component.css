@@ -26,6 +26,15 @@ h1 {
   margin-right: 3px;
   margin-bottom: 3px;
 }
+.startup-map {
+  min-height: 300px;
+  margin-top: 0.6em;
+}
+#myMap {
+  min-height: 300px;
+  height: 100%;
+  width: 100%;
+}
 @media (max-width: 735px) {
   .details{
     display: flex;
