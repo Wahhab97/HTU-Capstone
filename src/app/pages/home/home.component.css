@@ -45,6 +45,7 @@
   height: 100vh;
   box-sizing: border-box;
   padding: 16px;
+  background-color: #0822e538;
 }
 .charts-container h3 {
   text-align: center;

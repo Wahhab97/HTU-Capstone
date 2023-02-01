@@ -13,6 +13,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -30,7 +31,8 @@ const materials = [
   MatExpansionModule,
   MatPaginatorModule,
   MatDialogModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  MatChipsModule
 ]
 
 @NgModule({

@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FilestorageService} from "../../lib/services/storage/filestorage.service";
 import {StartupsService} from "../../lib/services/startups/startups.service";
 import {SectorsService} from "../../lib/services/sectors/sectors.service";
 import {Sector} from "../../lib/interfaces/sector";
 import Chart from  "chart.js/auto"
+import {MatChipListbox} from "@angular/material/chips";
 
 @Component({
   selector: 'app-home',
@@ -13,8 +14,10 @@ import Chart from  "chart.js/auto"
 export class HomeComponent implements OnInit{
   constructor(private storage: FilestorageService, private startupsService: StartupsService, private sectorsService: SectorsService) {
   }
+  @ViewChild(MatChipListbox) listBox?: MatChipListbox;
 
   sectorsArray: Sector[] = [];
+  sectorsToDisplay: Sector[] = [];
   chart: any;
   labels: any[] =[];
   chartData: any[] =[];
@@ -24,15 +27,36 @@ export class HomeComponent implements OnInit{
     this.sectorsService.getSectors().subscribe((response) => {
       if(response) {
         this.sectorsArray = response;
+        this.sectorsToDisplay = [...this.sectorsArray];
         this.sectorsArray.forEach((sector: Sector) => {
           this.chartData.push(sector.count);
           this.labels.push(sector.sectorName);
         });
+
         window.innerWidth >= 500 ? this.legendDisplay = true: this.legendDisplay = false;
         this.createChart();
         console.log(this.chart);
       }
     });
+  }
+  listBoxChange() {
+    if(this.listBox) {
+      if(this.listBox.value as string[] && this.listBox.value[0]) {
+        this.sectorsToDisplay = [];
+
+        this.listBox.value.forEach((element: string) => {
+          this.sectorsArray.forEach((sector: Sector) => {
+            if(sector.sectorName == element) {
+              this.sectorsToDisplay.push(sector);
+            }
+          });
+        });
+      } else {
+        this.sectorsToDisplay = [...this.sectorsArray];
+      }
+    } else {
+      this.sectorsToDisplay = [...this.sectorsArray];
+    }
   }
   createChart() {
     this.chart = new Chart("PieChart", {

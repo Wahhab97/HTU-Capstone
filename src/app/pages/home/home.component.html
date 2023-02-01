@@ -10,7 +10,10 @@
   </div>
 </section>
 <div class="page-container">
+  <mat-chip-listbox aria-label="sector selection" multiple (change)="listBoxChange()">
+    <mat-chip-option *ngFor="let sector of sectorsArray" color="accent">{{sector.sectorName}}</mat-chip-option>
+  </mat-chip-listbox>
   <section class="cards-container">
-    <app-sector *ngFor="let sector of sectorsArray" [childSector]="sector"></app-sector>
+    <app-sector *ngFor="let sector of sectorsToDisplay" [childSector]="sector"></app-sector>
   </section>
 </div>
