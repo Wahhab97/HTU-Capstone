@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit{
 
         window.innerWidth >= 500 ? this.legendDisplay = true: this.legendDisplay = false;
         this.createChart();
-        console.log(this.chart);
       }
     });
   }
