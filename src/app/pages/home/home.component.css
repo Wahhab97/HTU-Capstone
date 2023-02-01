@@ -41,12 +41,30 @@
   left: 0;
   z-index: -2;
 }
+.charts-container {
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 16px;
+}
+.charts-container h3 {
+  text-align: center;
+  font-size: 2em;
+}
+.charts-container .chart {
+  max-height: 95%;
+  min-height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.charts-container .chart canvas {
+  height: 100%;
+}
 @media (max-width: 599px) {
   .welcome {
     min-height: calc(100vh - 56px);
   }
 }
-
 
 .page-container .cards-container{
   display: grid;

@@ -3,6 +3,12 @@
   <p>We believe that the future of the country lies in the hands of entrepreneurs who are willing to take risks, challenge the status quo and create new solutions to old problems.</p>
   <p>Whether you're an entrepreneur looking for support, an investor searching for the next big thing, or just someone who is curious about what's happening in the startup world, we invite you to explore our site and learn about the exciting companies that are driving change in Jordan.</p>
 </section>
+<section class="charts-container">
+  <h3>Number of Startups in Each Sector</h3>
+  <div class="chart">
+    <canvas id="PieChart">{{chart}}</canvas>
+  </div>
+</section>
 <div class="page-container">
   <section class="cards-container">
     <app-sector *ngFor="let sector of sectorsArray" [childSector]="sector"></app-sector>
