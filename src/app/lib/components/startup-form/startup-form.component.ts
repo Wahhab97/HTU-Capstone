@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 import {locationMatcher, locationValidator} from "../../../pages/admin/create-startup/locationValidator";
 import {Sector} from "../../interfaces/sector";
 import {SectorsService} from "../../services/sectors/sectors.service";
@@ -24,6 +24,7 @@ export class StartupFormComponent implements OnInit{
 
   @Input() sPath = "";
   @Input() cPath = "";
+  @ViewChild(FormGroupDirective) formDirective!: FormGroupDirective;
 
   startupsForm = new FormGroup({
     name: new FormControl('',[Validators.required]),
@@ -151,7 +152,7 @@ export class StartupFormComponent implements OnInit{
     },
     error: (err: Error) => {console.error("Image upload error " + err)},
     complete: () => {
-      this.startupsForm.reset();
+      this.formDirective.resetForm();
       this.imgSrc = "";
     }
   };

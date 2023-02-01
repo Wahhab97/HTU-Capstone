@@ -39,6 +39,8 @@ export class LoginComponent {
               this.router.navigate(['admin/']);
             } else if (val?.role === 'user') {
               this.router.navigate(['users', val.id])
+            } else {
+              console.error("User is not logged in");
             }
           },
         });

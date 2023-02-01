@@ -20,6 +20,9 @@ export class FilestorageService {
       );
   }
   deleteFile(url: string) {
-    return this.fireStorage.refFromURL(url).delete();
+    // this.fireStorage.refFromURL()
+    console.log(url);
+    const ref = this.fireStorage.refFromURL(url)
+    return ref.delete();
   }
 }

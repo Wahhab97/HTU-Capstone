@@ -24,6 +24,8 @@ export class ViewRequestsComponent implements OnInit, AfterViewInit{
       if(value[0]) {
         this.dataSource.data = value;
         return;
+      } else {
+        this.dataSource.data = [];
       }
     },
     error: (err: Error) => console.error(err)
@@ -41,13 +43,14 @@ export class ViewRequestsComponent implements OnInit, AfterViewInit{
       data: {name: startupName, id: requestId, caller: "view-requests", url: logoUrl}
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.requestsService.getRequests().subscribe();
-    })
+      this.requestsService.getRequests().subscribe(this.startupsObserver);
+    });
   }
   approve(request: Startup){
-    this.startupsService.addStartup(request);
+    this.startupsService.addStartup({...request});
     this.requestsService.deleteRequest(request.id+"").subscribe(() => {
-      this.requestsService.getRequests().subscribe();
+      this.requestsService.getRequests().subscribe(this.startupsObserver);
+      console.log(request);
     });
 
   }

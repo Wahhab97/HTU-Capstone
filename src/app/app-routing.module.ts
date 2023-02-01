@@ -22,7 +22,8 @@ const routes: Routes = [
   {
     path: "auth",
     loadChildren: () => import("./pages/auth/auth.module").then(m => m.AuthModule),
-    canActivate: [NoAuthGuard]
+    canLoad: [NoAuthGuard],
+    canActivate: [NoAuthGuard],
   },
   {
     path: "admin",

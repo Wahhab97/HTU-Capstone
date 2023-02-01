@@ -45,10 +45,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit{
       }
     }
   }
-  deleteStartup(startupName: string, startupId: string){
+  deleteStartup(startupName: string, startupId: string, url: string){
     let dialogRef = this.dialog.open(DeleteComponent, {
       width: '500px',
-      data: {name: startupName, id: startupId, caller: 'admin-dashboard'}
+      data: {name: startupName, id: startupId, caller: 'admin-dashboard', url: url}
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.startupService.getStartups().subscribe(this.startupsObserver);

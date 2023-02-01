@@ -45,7 +45,7 @@
             <a [routerLink]="['edit', element.companyName]">
               <mat-icon>edit</mat-icon>
             </a>
-            <button mat-icon-button (click)="deleteStartup(element.companyName, element.id)">
+            <button mat-icon-button (click)="deleteStartup(element.companyName, element.id, element.logo)">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
