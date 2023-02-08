@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {locationMatcher, locationValidator} from "./locationValidator";
 import {FilestorageService} from "../../../lib/services/storage/filestorage.service";
 import {StartupsService} from "../../../lib/services/startups/startups.service";
 import {SectorsService} from "../../../lib/services/sectors/sectors.service";

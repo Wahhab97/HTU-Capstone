@@ -13,6 +13,6 @@ import {InputMapComponent} from "./input-map/input-map.component";
   ],
   exports: [
     InputMapComponent
-  ]
+  ],
 })
 export class MapModule { }
