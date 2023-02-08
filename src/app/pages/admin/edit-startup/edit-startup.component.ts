@@ -124,6 +124,12 @@ export class EditStartupComponent implements OnInit, OnDestroy{
       }
     })
   }
+  changeLoc(loc: any) {
+    this.editStartupForm.patchValue({
+      longitude: loc[0],
+      latitude: loc[1]
+    })
+  }
   changeCount(currentSec: string[], nextSec: string[]) {
     currentSec.forEach((sec) => {
       this.sectorsService.getSectorByName(sec).pipe(first()).subscribe((response:Sector[]) => {

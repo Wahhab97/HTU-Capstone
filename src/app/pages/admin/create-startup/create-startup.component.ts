@@ -31,9 +31,8 @@ export class CreateStartupComponent implements OnInit, OnDestroy{
     phone: new FormControl(""),
     latitude: new FormControl(0, [Validators.min(0), Validators.max(90), Validators.min(-90)]),
     longitude: new FormControl(0,[Validators.min(0), Validators.max(180), Validators.min(-180)])
-  }, [locationValidator]);
+  });
 
-  matcher = new locationMatcher();
 
   get name() {
     return this.startupsForm.get('name')?.value;
@@ -84,7 +83,12 @@ export class CreateStartupComponent implements OnInit, OnDestroy{
       error: err => console.error(err)
     });
   }
-
+  changeLoc(loc: any) {
+    this.startupsForm.patchValue({
+      longitude: loc[0],
+      latitude: loc[1]
+    })
+  }
   preview(target: any) {
     if(target.files) {
       this.fileToUpload = target.files.item(0);

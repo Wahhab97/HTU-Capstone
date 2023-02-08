@@ -54,14 +54,14 @@
   <div class="location">
     <mat-form-field>
       <mat-label>Latitude</mat-label>
-      <input matInput type="number" id="latitude" name="latitude" [errorStateMatcher]="matcher" formControlName="latitude">
+      <input matInput type="number" id="latitude" name="latitude" formControlName="latitude">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Longitude</mat-label>
-      <input matInput type="number" id="longitude" name="longitude" [errorStateMatcher]="matcher" formControlName="longitude">
+      <input matInput type="number" id="longitude" name="longitude" formControlName="longitude">
     </mat-form-field>
   </div>
-  <small *ngIf="startupsForm.hasError('locationIsNotValid')">Enter a valid location</small>
+  <app-input-map (newLocationEvent)="changeLoc($event)"></app-input-map>
   <button mat-raised-button color="primary" [disabled]="startupsForm.invalid">Create Startup</button>
 
 </form>

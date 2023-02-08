@@ -13,6 +13,7 @@ import { ViewRequestsComponent } from './view-requests/view-requests.component';
 import {RegisterFormComponent} from "../../lib/components/register-form/register-form.component";
 import { ViewSectorsComponent } from './view-sectors/view-sectors.component';
 import { CreateSectorComponent } from './create-sector/create-sector.component';
+import {InputMapComponent} from "../../lib/components/input-map/input-map.component";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { CreateSectorComponent } from './create-sector/create-sector.component';
       ViewRequestsComponent,
       RegisterFormComponent,
       ViewSectorsComponent,
-      CreateSectorComponent
+      CreateSectorComponent,
+      InputMapComponent
     ],
   imports: [
     CommonModule,

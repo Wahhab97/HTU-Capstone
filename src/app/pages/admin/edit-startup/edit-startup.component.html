@@ -63,7 +63,7 @@
         <input matInput type="number" id="longitude" name="longitude" formControlName="longitude">
       </mat-form-field>
     </div>
-    <small *ngIf="editStartupForm.hasError('locationIsNotValid')">Enter a valid location</small>
+    <app-input-map (newLocationEvent)="changeLoc($event)"></app-input-map>
     <button mat-raised-button color="primary" [disabled]="editStartupForm.invalid">Edit Startup</button>
 
   </form>

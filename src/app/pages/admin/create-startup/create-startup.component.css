@@ -41,4 +41,6 @@
 .location * {
   flex: 1;
 }
-
+app-input-map {
+  margin-bottom: 0.6em;
+}

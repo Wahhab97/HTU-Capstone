@@ -40,9 +40,8 @@ export class StartupFormComponent implements OnInit, OnDestroy{
     phone: new FormControl(""),
     latitude: new FormControl(0, [Validators.max(90), Validators.min(-90)]),
     longitude: new FormControl(0,[Validators.max(180), Validators.min(-180)])
-  }, [locationValidator]);
+  });
 
-  matcher = new locationMatcher();
 
   get name() {
     return this.startupsForm.get('name')?.value;
@@ -166,6 +165,12 @@ export class StartupFormComponent implements OnInit, OnDestroy{
         .subscribe(this.uploadStartupObserver);
     }
     this.router.navigate(['']);
+  }
+  changeLoc(loc: any) {
+    this.startupsForm.patchValue({
+      longitude: loc[0],
+      latitude: loc[1]
+    })
   }
   ngUnsubscribe = new Subject<void>();
   ngOnDestroy() {
