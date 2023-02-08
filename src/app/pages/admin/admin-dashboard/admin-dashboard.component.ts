@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {StartupsService} from "../../../lib/services/startups/startups.service";
 import {Router} from "@angular/router";
 import {SectorsService} from "../../../lib/services/sectors/sectors.service";
@@ -8,19 +8,20 @@ import {MatPaginator} from "@angular/material/paginator";
 import {Filter} from "../../../lib/interfaces/filter";
 import {MatDialog} from "@angular/material/dialog";
 import {DeleteComponent} from "../../../lib/components/delete/delete.component";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css']
 })
-export class AdminDashboardComponent implements OnInit, AfterViewInit{
+export class AdminDashboardComponent implements OnInit, AfterViewInit, OnDestroy{
   dataSource = new MatTableDataSource<Startup>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns = ['logo', 'name', 'city', 'founder', 'numOfEmployees', 'yearOfEstablishment', 'website', 'email', 'phone', 'actions']
   constructor(private startupService: StartupsService, private router: Router, private sectorsService: SectorsService, public dialog: MatDialog) {}
   ngOnInit() {
-    this.startupService.getStartups().subscribe(this.startupsObserver);
+    this.startupService.getStartups().pipe(takeUntil(this.ngUnsubscribe)).subscribe(this.startupsObserver);
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -37,10 +38,10 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit{
   addedFilter(filter: Filter) {
     if(filter) {
       if(filter.comName) {
-        this.startupService.getStartupByName(filter.comName).subscribe(this.startupsObserver);
+        this.startupService.getStartupByName(filter.comName).pipe(takeUntil(this.ngUnsubscribe)).subscribe(this.startupsObserver);
       } else if(filter.sectors) {
         if(filter.sectors[0]){
-           this.startupService.getStartupsBySectors(filter.sectors).subscribe(this.startupsObserver);
+           this.startupService.getStartupsBySectors(filter.sectors).pipe(takeUntil(this.ngUnsubscribe)).subscribe(this.startupsObserver);
         }
       }
     }
@@ -51,7 +52,12 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit{
       data: {name: startupName, id: startupId, caller: 'admin-dashboard', url: url}
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.startupService.getStartups().subscribe(this.startupsObserver);
+      this.startupService.getStartups().pipe(takeUntil(this.ngUnsubscribe)).subscribe(this.startupsObserver);
     })
+  }
+  ngUnsubscribe = new Subject<void>();
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

@@ -17,7 +17,7 @@ export class SectorsService {
   }
   getSectorByName(sectorName: string): Observable<Sector[]> {
     return this.fireStore
-      .collection<Sector>('Sectors', ref => ref.where('sectorName', 'array-contains', sectorName)).valueChanges({"idField": "id"})
+      .collection<Sector>('Sectors', ref => ref.where('sectorName', '==', sectorName)).valueChanges({"idField": "id"})
   }
   getSectors():Observable<Sector[]> {
     return this.fireStore
@@ -29,4 +29,5 @@ export class SectorsService {
   deleteSector(id: string) {
     return this.sectorsCollection.doc(id).delete();
   }
+
 }

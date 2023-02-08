@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {StartupsService} from "../../../lib/services/startups/startups.service";
 import {Startup} from "../../../lib/interfaces/startup";
 import * as atlas from "azure-maps-control";
 import {AuthenticationType} from "azure-maps-control";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-startup',
   templateUrl: './startup.component.html',
   styleUrls: ['./startup.component.css']
 })
-export class StartupComponent implements OnInit{
+export class StartupComponent implements OnInit, OnDestroy{
   constructor(private route: ActivatedRoute, private startupsService: StartupsService, private router: Router) {}
 
   name: string|null = "";
@@ -26,7 +27,7 @@ export class StartupComponent implements OnInit{
   ngOnInit() {
     this.name = this.route.snapshot.paramMap.get('startupName');
     if(this.name) {
-      this.startupsService.getStartupByName(this.name).subscribe({
+      this.startupsService.getStartupByName(this.name).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: (value) => {
           if(value[0]) {
             this.startupObj = value[0];
@@ -73,5 +74,10 @@ export class StartupComponent implements OnInit{
   }
   goToSector(sector: string) {
     this.router.navigate(['sectors/'+ sector])
+  }
+  ngUnsubscribe = new Subject<void>();
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

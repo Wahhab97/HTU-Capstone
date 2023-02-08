@@ -1,17 +1,18 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {SectorsService} from "../../../lib/services/sectors/sectors.service";
 import {Sector} from "../../../lib/interfaces/sector";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateSectorComponent} from "../create-sector/create-sector.component";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-view-sectors',
   templateUrl: './view-sectors.component.html',
   styleUrls: ['./view-sectors.component.css']
 })
-export class ViewSectorsComponent implements OnInit, AfterViewInit{
+export class ViewSectorsComponent implements OnInit, AfterViewInit, OnDestroy{
   constructor(private sectorsService: SectorsService, public dialog: MatDialog) {}
   dataSource = new MatTableDataSource<Sector>([]);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -26,7 +27,7 @@ export class ViewSectorsComponent implements OnInit, AfterViewInit{
     error: (err: Error) => console.error(err),
   }
   ngOnInit() {
-    this.sectorsService.getSectors().subscribe(this.sectorObserver);
+    this.sectorsService.getSectors().pipe(takeUntil(this.ngUnsubscribe)).subscribe(this.sectorObserver);
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -45,7 +46,12 @@ export class ViewSectorsComponent implements OnInit, AfterViewInit{
       maxWidth: "95%",
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.sectorsService.getSectors();
+      this.sectorsService.getSectors().pipe(takeUntil(this.ngUnsubscribe));
     })
+  }
+  ngUnsubscribe = new Subject<void>();
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

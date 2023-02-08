@@ -1,8 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Startup} from "../../../lib/interfaces/startup";
-import {Observable, switchMap} from "rxjs";
+import {first, Observable, Subject, switchMap, takeUntil} from "rxjs";
 import {StartupsService} from "../../../lib/services/startups/startups.service";
 import {SectorsService} from "../../../lib/services/sectors/sectors.service";
 import {Sector} from "../../../lib/interfaces/sector";
@@ -13,7 +13,7 @@ import {FilestorageService} from "../../../lib/services/storage/filestorage.serv
   templateUrl: './edit-startup.component.html',
   styleUrls: ['./edit-startup.component.css']
 })
-export class EditStartupComponent implements OnInit{
+export class EditStartupComponent implements OnInit, OnDestroy{
   startup?: Startup;
   startup$?: Observable<Startup[] | undefined>;
   startupName!: string;
@@ -21,7 +21,7 @@ export class EditStartupComponent implements OnInit{
     this.startup$ = this.route.paramMap.pipe(
       switchMap((value) => {
         this.startupName = value.get('startupName')+'';
-        return this.startupsService.getStartupByName(this.startupName)
+        return this.startupsService.getStartupByName(this.startupName).pipe(takeUntil(this.ngUnsubscribe));
       })
     );
     this.startup$.subscribe({
@@ -114,7 +114,7 @@ export class EditStartupComponent implements OnInit{
     }
   }
   ngOnInit() {
-    this.sectorsService.getSectors().subscribe({
+    this.sectorsService.getSectors().pipe(takeUntil(this.ngUnsubscribe)).subscribe({
       next: (value:Sector[]) => {
         if(value) {
           value.forEach((element:Sector) => {
@@ -124,15 +124,38 @@ export class EditStartupComponent implements OnInit{
       }
     })
   }
+  changeCount(currentSec: string[], nextSec: string[]) {
+    currentSec.forEach((sec) => {
+      this.sectorsService.getSectorByName(sec).pipe(first()).subscribe((response:Sector[]) => {
+        if(response){
+          if(response[0].id) {
+            let id = response[0].id;
+            this.sectorsService.changeSectorCount(id, response[0].count-1);
+          }
+        }
+      });
+    });
+    nextSec.forEach((sector:string) => {
+      this.sectorsService.getSectorByName(sector).pipe(first()).subscribe((response:Sector[]) => {
+        if(response){
+          if(response[0].id) {
+            let id = response[0].id;
+            this.sectorsService.changeSectorCount(id, response[0].count+1);
+          }
+        }
+      });
+    });
+  }
 
   updateStartup() {
     if(this.startup){
       if (this.editStartupForm.controls.logo.value) {
-        this.storage.deleteFile(this.startup.logo).subscribe({
+        this.storage.deleteFile(this.startup.logo).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
           next: () => {
-            this.storage.uploadFile("logos",this.fileToUpload).subscribe({
+            this.storage.uploadFile("logos",this.fileToUpload).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
               next: (value) => {
                 if (this.sector && this.startup) {
+                  this.changeCount(this.startup.sector, this.sector);
                   return this.startupsService.updateStartup(this.startup.id + "", {
                     companyName: this.name + "",
                     logo: value,
@@ -148,7 +171,7 @@ export class EditStartupComponent implements OnInit{
                       longitude: this.longitude + "",
                       latitude: this.latitude + ""
                     }
-                  });
+                  }).pipe(takeUntil(this.ngUnsubscribe));
                 }
                 return;
               },
@@ -157,6 +180,7 @@ export class EditStartupComponent implements OnInit{
           }
         })
       } else {
+        this.changeCount(this.startup.sector, this.sector!);
         this.startupsService.updateStartup(this.startup.id+'', {
           companyName: this.name + "",
           logo: this.startup.logo,
@@ -172,9 +196,14 @@ export class EditStartupComponent implements OnInit{
             longitude: this.longitude + "",
             latitude: this.latitude + ""
           }
-        }).subscribe()
+        }).pipe(takeUntil(this.ngUnsubscribe)).subscribe()
       }
     }
     this.router.navigate(['']);
+  }
+  ngUnsubscribe = new Subject<void>();
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

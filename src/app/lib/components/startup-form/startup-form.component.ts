@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 import {locationMatcher, locationValidator} from "../../../pages/admin/create-startup/locationValidator";
 import {Sector} from "../../interfaces/sector";
@@ -7,13 +7,14 @@ import {FilestorageService} from "../../services/storage/filestorage.service";
 import {RequestsService} from "../../services/requests/requests.service";
 import {StartupsService} from "../../services/startups/startups.service";
 import {Router} from "@angular/router";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-startup-form',
   templateUrl: './startup-form.component.html',
   styleUrls: ['./startup-form.component.css']
 })
-export class StartupFormComponent implements OnInit{
+export class StartupFormComponent implements OnInit, OnDestroy{
   constructor(
     private sectorsService: SectorsService,
     private storage: FilestorageService,
@@ -82,7 +83,7 @@ export class StartupFormComponent implements OnInit{
   fileToUpload:any;
 
   ngOnInit() {
-    this.sectorsService.getSectors().subscribe({
+    this.sectorsService.getSectors().pipe(takeUntil(this.ngUnsubscribe)).subscribe({
       next: (value:Sector[]) => {
         if(value) {
           value.forEach((sec) => {
@@ -158,12 +159,17 @@ export class StartupFormComponent implements OnInit{
   };
   submitForm(){
     if(this.cPath === "Requests") {
-      this.storage.uploadFile(this.sPath+'', this.fileToUpload)
+      this.storage.uploadFile(this.sPath+'', this.fileToUpload).pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(this.uploadRequestObserver);
     } else if (this.cPath === "Startups"){
-      this.storage.uploadFile(this.sPath+'', this.fileToUpload)
+      this.storage.uploadFile(this.sPath+'', this.fileToUpload).pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(this.uploadStartupObserver);
     }
     this.router.navigate(['']);
+  }
+  ngUnsubscribe = new Subject<void>();
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

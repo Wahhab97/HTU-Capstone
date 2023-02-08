@@ -1,17 +1,18 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FilestorageService} from "../../lib/services/storage/filestorage.service";
 import {StartupsService} from "../../lib/services/startups/startups.service";
 import {SectorsService} from "../../lib/services/sectors/sectors.service";
 import {Sector} from "../../lib/interfaces/sector";
 import Chart from  "chart.js/auto"
 import {MatChipListbox} from "@angular/material/chips";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit, OnDestroy{
   constructor(private storage: FilestorageService, private startupsService: StartupsService, private sectorsService: SectorsService) {
   }
   @ViewChild(MatChipListbox) listBox?: MatChipListbox;
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit{
   legendDisplay = true;
 
   ngOnInit() {
-    this.sectorsService.getSectors().subscribe((response) => {
+    this.sectorsService.getSectors().pipe(takeUntil(this.ngUnsubscribe)).subscribe((response) => {
       if(response) {
         this.sectorsArray = response;
         this.sectorsToDisplay = [...this.sectorsArray];
@@ -76,5 +77,10 @@ export class HomeComponent implements OnInit{
         }
       }
     });
+  }
+  ngUnsubscribe = new Subject<void>();
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
