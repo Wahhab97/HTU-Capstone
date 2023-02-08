@@ -13,7 +13,7 @@ import { ViewRequestsComponent } from './view-requests/view-requests.component';
 import {RegisterFormComponent} from "../../lib/components/register-form/register-form.component";
 import { ViewSectorsComponent } from './view-sectors/view-sectors.component';
 import { CreateSectorComponent } from './create-sector/create-sector.component';
-import {InputMapComponent} from "../../lib/components/input-map/input-map.component";
+import {MapModule} from "../../lib/components/map/map.module";
 
 
 @NgModule({
@@ -27,14 +27,14 @@ import {InputMapComponent} from "../../lib/components/input-map/input-map.compon
       RegisterFormComponent,
       ViewSectorsComponent,
       CreateSectorComponent,
-      InputMapComponent
     ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MapModule
   ]
 })
 export class AdminModule { }

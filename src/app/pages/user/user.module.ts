@@ -5,19 +5,20 @@ import { UserRoutingModule } from './user-routing.module';
 import { RequestComponent } from './request/request.component';
 import {StartupFormComponent} from "../../lib/components/startup-form/startup-form.component";
 import {MaterialModule} from "../../material/material.module";
-import {InputMapComponent} from "../../lib/components/input-map/input-map.component";
+import {MapModule} from "../../lib/components/map/map.module";
 
 
 @NgModule({
   declarations: [
     RequestComponent,
     StartupFormComponent,
-    InputMapComponent
+    // InputMapComponent
   ],
-    imports: [
-        CommonModule,
-        UserRoutingModule,
-        MaterialModule,
-    ]
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    MaterialModule,
+    MapModule
+  ]
 })
 export class UserModule { }
